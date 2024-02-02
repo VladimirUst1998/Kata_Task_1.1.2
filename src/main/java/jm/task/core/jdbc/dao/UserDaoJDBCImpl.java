@@ -7,7 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.sql.DriverManager.getConnection;
 
 public class UserDaoJDBCImpl extends Util implements UserDao {
     public UserDaoJDBCImpl() {
@@ -17,7 +16,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
     public void createUsersTable() {
         connection = getConnection();
-        String sqlquery = "CREATE TABLE IF NOT EXISTS USERS (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(45), lastName VARCHAR(45), age INT, PRIMARY KEY (ID))";
+        String sqlquery = "CREATE TABLE IF NOT EXISTS USERS (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(45), lastName VARCHAR(45), age TINYINT, PRIMARY KEY (ID))";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlquery)) {
             preparedStatement.executeUpdate();
         } catch (SQLException | NullPointerException e) {
@@ -44,6 +43,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setByte(3, age);
             preparedStatement.executeUpdate();
+            System.out.println("User с именем – " + name + " добавлен в базу данных");
         } catch (SQLException e) {
             e.printStackTrace();
         }
