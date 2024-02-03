@@ -11,7 +11,7 @@ import java.util.List;
 public class UserDaoJDBCImpl extends Util implements UserDao {
     public UserDaoJDBCImpl() {
     }
-        Connection connection;
+      private Connection connection;
 
 
     public void createUsersTable() {
